@@ -1,0 +1,2 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:138:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\system\system_data_edit.html";i:1544781487;}*/ ?>
+this is system_data_edit html
