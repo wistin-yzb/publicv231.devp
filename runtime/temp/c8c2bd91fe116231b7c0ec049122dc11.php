@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\login.html";i:1544867444;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\login.html";i:1545045425;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>后台登录 - H-ui.admin v3.1</title>
+<title>后台登录 - 公众号粉丝管理系统v1.0</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"

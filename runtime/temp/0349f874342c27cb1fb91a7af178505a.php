@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1544782226;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1545045467;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -28,7 +28,7 @@
 <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>H-ui.admin v3.1</title>
+<title>公众号粉丝管理系统v1.0</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"
@@ -38,12 +38,9 @@
 	<header class="navbar-wrapper">
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
-				<a class="logo navbar-logo f-l mr-10 hidden-xs"
-					href="/aboutHui.shtml">H-ui.admin</a> <a
-					class="logo navbar-logo-m f-l mr-10 visible-xs"
-					href="/aboutHui.shtml">H-ui</a> <span
-					class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> <a
-					aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
+				<a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:location.replace(location.href);">公众号粉丝管理系统</a> 				
+				<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+				<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
 					href="javascript:;">&#xe667;</a>
 				<nav class="nav navbar-nav">
 					<ul class="cl">
@@ -77,9 +74,11 @@
 								<li><a href="#">切换账户</a></li>
 								<li><a href="<?php echo url('Index/loginout'); ?>">退出</a></li>
 							</ul></li>
-						<li id="Hui-msg"><a href="#" title="消息"><span
-								class="badge badge-danger">1</span><i class="Hui-iconfont"
-								style="font-size: 18px">&#xe68a;</i></a></li>
+						<li id="Hui-msg">
+						<a href="#" title="消息">
+						<span class="badge badge-danger">1</span>
+						<i class="Hui-iconfont" style="font-size: 18px">&#xe68a;</i></a>
+						</li>
 						<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 							href="javascript:;" class="dropDown_A" title="换肤"><i
 								class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
@@ -246,6 +245,18 @@
 					<ul>
 						<li><a data-href="<?php echo url('user/user_list'); ?>" data-title="用户列表"
 							href="javascript:void(0)">用户列表</a></li>						
+					</ul>
+				</dd>
+			</dl>
+			<dl id="menu-test">
+				<dt>
+					<i class="Hui-iconfont">&#xe62e;</i> 测试管理<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="<?php echo url('test/test_list'); ?>" data-title="测试列表"
+							href="javascript:void(0)">测试列表</a></li>						
 					</ul>
 				</dd>
 			</dl>

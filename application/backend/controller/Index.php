@@ -14,8 +14,7 @@ class Index extends controller {
 		//助手函数
 // 		$data = db('test')->where('id',1)->find();
 // 		echo '<pre>';
-// 		var_export($data);
-
+// 		var_export($data);		
 		$view = new View ();
 		return $view->fetch ();
 	}
@@ -48,7 +47,9 @@ class Index extends controller {
 	
 	// welcome
 	public function welcome() {
-		$view = new View ();
+		$view = new View ();		
+		$view->lastLoginIp = $this->request->ip();
+		$view->lastLoginTime = date('Y-m-d H:i:s',time());
 		return $view->fetch ();
 	}
 	
