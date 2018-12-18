@@ -60,4 +60,39 @@ class Index extends controller {
 				'token' => 'ffdffferr023dvwiwiwixin;~*)999adf' . $systime 
 		] );
 	}
+	
+	//clearcache
+	public function clearcache(){		
+		$R = RUNTIME_PATH;
+		//执行删除函数
+		if($this->_deleteDir($R))
+		exit(json_encode(1));
+		else
+		exit(json_encode(-1));
+	}
+	
+	//删除文件夹
+	private function _deleteDir($R){
+		//打开一个目录句柄
+		$handle = opendir($R);
+		//读取目录,直到没有目录为止
+		while(($item = readdir($handle)) !== false){
+			//跳过. ..两个特殊目录
+			if($item != '.' and $item != '..'){
+				//如果遍历到的是目录
+				if(is_dir($R.'/'.$item)){
+					//继续向目录里面遍历
+					$this->_deleteDir($R.'/'.$item);
+				}else{
+					//如果不是目录，删除该文件
+					if(!unlink($R.'/'.$item))
+						die('error!');
+				}
+			}
+		}
+		//关闭目录
+		closedir( $handle );
+		//删除空的目录
+		return rmdir($R);
+	}
 }

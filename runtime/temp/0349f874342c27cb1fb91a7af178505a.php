@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1545045467;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1545124939;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -49,17 +49,14 @@
 								class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;"
-									onclick="article_add('添加资讯','<?php echo url('article/article_add'); ?>')"><i
-										class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+									onclick="article_add('添加公众号','<?php echo url('vipcn/vipcn_add'); ?>')"><i
+										class="Hui-iconfont">&#xe677;</i> 公众号</a></li>
 								<li><a href="javascript:;"
-									onclick="picture_add('添加资讯','<?php echo url('picture/picture_add'); ?>')"><i
-										class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+									onclick="picture_add('添加粉丝数据','<?php echo url('fan/fan_add'); ?>')"><i
+										class="Hui-iconfont">&#xe705;</i> 粉丝</a></li>
 								<li><a href="javascript:;"
-									onclick="product_add('添加资讯','<?php echo url('product/product_add'); ?>')"><i
-										class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-								<li><a href="javascript:;"
-									onclick="member_add('添加用户','<?php echo url('member/member_add'); ?>','','510')"><i
-										class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+									onclick="product_add('添加阅读数据','<?php echo url('read/read_add'); ?>')"><i
+										class="Hui-iconfont">&#xe653;</i> 阅读</a></li>								
 							</ul></li>
 					</ul>
 				</nav>
@@ -70,21 +67,22 @@
 						<li class="dropDown dropDown_hover"><a href="#"
 							class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
-								<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-								<li><a href="#">切换账户</a></li>
+								<!-- <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+								<li><a href="#">切换账户</a></li> -->
+								<li><a href="javascript:;" onClick="clearcache()">清除缓存</a></li>
 								<li><a href="<?php echo url('Index/loginout'); ?>">退出</a></li>
 							</ul></li>
-						<li id="Hui-msg">
+						<!-- <li id="Hui-msg">
 						<a href="#" title="消息">
 						<span class="badge badge-danger">1</span>
 						<i class="Hui-iconfont" style="font-size: 18px">&#xe68a;</i></a>
-						</li>
+						</li> -->
 						<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 							href="javascript:;" class="dropDown_A" title="换肤"><i
 								class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;" data-val="default"
-									title="默认（黑色）">默认（黑色）</a></li>
+									title="默认(黑色)">默认(黑色)</a></li>
 								<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
 								<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
 								<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
@@ -98,7 +96,7 @@
 	</header>
 	<aside class="Hui-aside">
 		<div class="menu_dropdown bk_2">
-			<dl id="menu-article">
+			<!-- <dl id="menu-article">
 				<dt>
 					<i class="Hui-iconfont">&#xe616;</i> 资讯管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -109,8 +107,8 @@
 							href="javascript:void(0)">资讯管理</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-picture">
+			</dl> -->
+			<!-- <dl id="menu-picture">
 				<dt>
 					<i class="Hui-iconfont">&#xe613;</i> 图片管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -121,8 +119,8 @@
 							href="javascript:void(0)">图片管理</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-product">
+			</dl> -->
+			<!-- <dl id="menu-product">
 				<dt>
 					<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -137,22 +135,22 @@
 							href="javascript:void(0)">产品管理</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-comments">
+			</dl> -->
+			<!-- <dl id="menu-comments">
 				<dt>
 					<i class="Hui-iconfont">&#xe622;</i> 评论管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
 				<dd>
 					<ul>
-						<!-- <li><a data-href="http://h-ui.duoshuo.com/admin/"
-							data-title="评论列表" href="javascript:;">评论列表</a></li> -->
+						<li><a data-href="http://h-ui.duoshuo.com/admin/"
+							data-title="评论列表" href="javascript:;">评论列表</a></li>
 						<li><a data-href="<?php echo url('comment/feedback_list'); ?>" data-title="意见反馈"
 							href="javascript:void(0)">意见反馈</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-member">
+			</dl> -->
+			<!-- <dl id="menu-member">
 				<dt>
 					<i class="Hui-iconfont">&#xe60d;</i> 会员管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -175,8 +173,8 @@
 							href="javascript:void(0)">分享记录</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-admin">
+			</dl> -->
+			<!-- <dl id="menu-admin">
 				<dt>
 					<i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -191,8 +189,8 @@
 							href="javascript:void(0)">管理员列表</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-tongji">
+			</dl> -->
+			<!-- <dl id="menu-tongji">
 				<dt>
 					<i class="Hui-iconfont">&#xe61a;</i> 系统统计<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -215,8 +213,8 @@
 							href="javascript:void(0)">3D饼状图</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-system">
+			</dl> -->
+			<!-- <dl id="menu-system">
 				<dt>
 					<i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -235,8 +233,8 @@
 							href="javascript:void(0)">系统日志</a></li>
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-user">
+			</dl> -->
+			<!-- <dl id="menu-user">
 				<dt>
 					<i class="Hui-iconfont">&#xe62e;</i> 用户管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -247,8 +245,8 @@
 							href="javascript:void(0)">用户列表</a></li>						
 					</ul>
 				</dd>
-			</dl>
-			<dl id="menu-test">
+			</dl> -->
+			<!-- <dl id="menu-test">
 				<dt>
 					<i class="Hui-iconfont">&#xe62e;</i> 测试管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -257,6 +255,56 @@
 					<ul>
 						<li><a data-href="<?php echo url('test/test_list'); ?>" data-title="测试列表"
 							href="javascript:void(0)">测试列表</a></li>						
+					</ul>
+				</dd>
+			</dl> -->
+			<dl id="menu-vipcn">
+				<dt>
+					<i class="Hui-iconfont">&#xe677;</i> 公众号管理<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="<?php echo url('vipcn/vipcn_list'); ?>" data-title="公众号列表"
+							href="javascript:void(0)">公众号列表</a></li>						
+					</ul>
+				</dd>
+			</dl>
+			<dl id="menu-fan">
+				<dt>
+					<i class="Hui-iconfont">&#xe705;</i> 粉丝数据管理<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="<?php echo url('fan/fan_list'); ?>" data-title="粉丝数据列表"
+							href="javascript:void(0)">粉丝数据列表</a></li>											
+					</ul>
+				</dd>
+			</dl>
+			<dl id="menu-read">
+				<dt>
+					<i class="Hui-iconfont">&#xe653;</i> 阅读数据管理<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="<?php echo url('read/read_list'); ?>" data-title="阅读数据列表"
+							href="javascript:void(0)">阅读数据列表</a></li>											
+					</ul>
+				</dd>
+			</dl>
+			<dl id="menu-read">
+				<dt>
+					<i class="Hui-iconfont">&#xe629;</i> 图形报表管理<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="<?php echo url('fan/fan_report'); ?>" data-title="粉丝数据报表"
+							href="javascript:void(0)">粉丝数据报表</a></li>		
+						<li><a data-href="<?php echo url('read/read_report'); ?>" data-title="阅读数据报表"
+							href="javascript:void(0)">阅读数据报表</a></li>												
 					</ul>
 				</dd>
 			</dl>
@@ -334,7 +382,25 @@
 				content : '<div>管理员信息</div>'
 			});
 		}
-
+        /*清除缓存*/
+        function clearcache(){
+        	$.ajax({
+    			type: 'POST',
+    			url: '<?php echo url("index/clearcache"); ?>',
+    			dataType: 'json',
+    			data:{},
+    			success: function(data){
+    				if(data==1){    					
+    					layer.msg('清除缓存成功!',{icon: 1,time:2000});
+    				}else{
+    					layer.msg('清除缓存失败!',{icon: 2,time:2000});
+    				}				
+    			},
+    			error:function(data) {
+    				console.log(data.msg);
+    			},
+    		});	
+        }
 		/*资讯-添加*/
 		function article_add(title, url) {
 			var index = layer.open({

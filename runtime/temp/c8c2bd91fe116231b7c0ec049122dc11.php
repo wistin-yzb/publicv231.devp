@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\login.html";i:1545045425;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\login.html";i:1545116230;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
@@ -35,30 +35,36 @@
 	<div class="header"></div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
-			<form class="form form-horizontal" action="<?php echo url('Index/checklogin'); ?>" method="post">
+			<form class="form form-horizontal"
+				action="<?php echo url('Index/checklogin'); ?>" method="post">
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="account" name="account" type="text" placeholder="账户" class="input-text size-L"/>
+						<input id="account" name="account" type="text" placeholder="账户"
+							class="input-text size-L" />
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L"/>
+						<input id="password" name="password" type="password"
+							placeholder="密码" class="input-text size-L" />
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
-						<input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}"
-							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" name="captcha" style="width: 150px;">
-							<img id="captcha" src="<?php echo captcha_src(); ?>" alt="captcha"/>
-							<a id="kanbuq" href="javascript:$('#captcha').attr('src','<?php echo captcha_src(); ?>')">看不清，换一张</a>
+						<input class="input-text size-L" type="text" placeholder="验证码"
+							onblur="if(this.value==''){this.value='验证码:'}"
+							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:"
+							name="captcha" style="width: 130px;"> <img id="captcha"
+							src="<?php echo captcha_src(); ?>" alt="captcha" /> <a id="kanbuq"
+							href="javascript:$('#captcha').attr('src','<?php echo captcha_src(); ?>')">看不清，换一张</a>
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
-						<label for="online"> <input type="checkbox" name="online" id="online" value=""> 使我保持登录状态
+						<label for="online"> <input type="checkbox" name="online"
+							id="online" value=""> 使我保持登录状态
 						</label>
 					</div>
 				</div>
@@ -73,7 +79,8 @@
 			</form>
 		</div>
 	</div>
-	<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
+	<div class="footer">Copyright &copy;由zoey开发并提供技术支持 by H-ui.admin
+		v3.1</div>
 	<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
 </body>

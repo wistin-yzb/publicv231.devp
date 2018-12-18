@@ -30,7 +30,7 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>添加测试</title>
+<title>添加阅读数据</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"
@@ -39,24 +39,35 @@
 <body>
 	<article class="page-container">
 		<form action="" method="post" class="form form-horizontal"
-			id="form-test-add">
+			id="form-read-add">
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>标题：</label>
+					class="c-red">*</span>公众号：</label>
+				<div class="formControls col-xs-4 col-sm-9">
+					<span class="select-box"> <select class="select" size="1"
+						name="vipcn_id" id="vipcn_id">							
+							<option value="0">请选择</option>
+							{volist name="vipcn_list" id="vo"}
+							<option value="{$vo.vipcn_id}-{$vo.name}" {eq name="$info['vipcn_id']" value="$vo.vipcn_id"}selected{/eq}>{$vo.name}</option>
+							{/volist}				
+					</select>
+					</span>
+				</div>
+			</div>	
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>页面阅读数：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="{$info.title}"
-						placeholder="" id="title" name="title">
+					<input type="text" class="input-text" value="{$info.pageview}"
+						placeholder="请输入页面阅读数" id="pageview" name="pageview">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>内容：</label>
+					class="c-red">*</span>阅读率：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<textarea name="content" id="content" cols="" rows=""
-						class="textarea" placeholder="说点什么...最少输入10个字符">{$info.content}</textarea>
-					<p class="textarea-numberbar">
-						<em class="textarea-length">0</em>/100
-					</p>
+					<input type="text" class="input-text" value="{$info.readrate}"
+						placeholder="请输入阅读率,如:75%" id="readrate" name="readrate">
 				</div>
 			</div>
 			<div class="row cl">
@@ -66,6 +77,7 @@
 				</div>
 			</div>
 			<input type="hidden" id="id" name="id" value="{$info.id}" />
+			<input type="hidden" id="status" name="status" value="{$info.status}" />
 		</form>
 	</article>
 
@@ -94,25 +106,22 @@
 				increaseArea : '20%'
 			});
 			//validation rules
-			$("#form-test-add").validate({
+			$("#form-read-add").validate({
 				debug : false,
 				rules : {
-					title : {
+					pageview : {
 						required : true,
-						minlength : 2,
-						maxlength : 16
 					},
-					content : {
+					readrate : {
 						required : true,
 					},
 				},
 				messages : {
-					title : {
-						required : "请输入标题",
-						minlength : "标题长度由2~16字符组成"
+					pageview : {
+						required : "请填写页面阅读数",
 					},
-					content : {
-						required : "请说点什么",
+					readrate : {
+						required : "请填写阅读率,如:75%",
 					},
 				},
 				onkeyup : false,
@@ -120,24 +129,30 @@
 				success : 'valid',
 			});
 			//submit form
-			$('#form-test-add').on('submit', function() {
-				if (!$('#title').val() || !$('#content').val()) {
-					return false;
-				}
-				var options = {
-					url : "{:url('test/test_submit')}",
-					dataType : "json",
-					type : "post",
-					clearForm : true,
-					resetForm : true,
-					timeout : 3000,
-					success : ResponseAfterSuccess,
-					error : function() {
-						alert('error!');
-					},
-				};
-				$('#form-test-add').ajaxSubmit(options);
-			});
+			$('#form-read-add').on(
+					'submit',
+					function() {
+						if ($('#vipcn_id').val() == 0) {
+							layer.msg('请选择所属公众号!');
+							return false;
+						}
+						if (!$('#pageview').val() || !$('#readrate').val()) {
+							return false;
+						}						
+						var options = {
+							url : "{:url('read/read_submit')}",
+							dataType : "json",
+							type : "post",
+							clearForm : true,
+							resetForm : true,
+							timeout : 3000,
+							success : ResponseAfterSuccess,
+							error : function() {
+								alert('error!');
+							},
+						};
+						$('#form-read-add').ajaxSubmit(options);
+					});
 		});
 		//form submit callback
 		function ResponseAfterSuccess(data) {

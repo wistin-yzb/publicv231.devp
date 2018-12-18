@@ -30,7 +30,7 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>添加测试</title>
+<title>添加粉丝数据</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"
@@ -39,24 +39,43 @@
 <body>
 	<article class="page-container">
 		<form action="" method="post" class="form form-horizontal"
-			id="form-test-add">
+			id="form-fan-add">
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>标题：</label>
+					class="c-red">*</span>公众号：</label>
+				<div class="formControls col-xs-4 col-sm-9">
+					<span class="select-box"> <select class="select" size="1"
+						name="vipcn_id" id="vipcn_id">							
+							<option value="0">请选择</option>
+							{volist name="vipcn_list" id="vo"}
+							<option value="{$vo.vipcn_id}-{$vo.name}" {eq name="$info['vipcn_id']" value="$vo.vipcn_id"}selected{/eq}>{$vo.name}</option>
+							{/volist}				
+					</select>
+					</span>
+				</div>
+			</div>	
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>总粉丝数量：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="{$info.title}"
-						placeholder="" id="title" name="title">
+					<input type="text" class="input-text" value="{$info.total_fan_num}"
+						placeholder="请输入总粉丝数量" id="total_fan_num" name="total_fan_num">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>内容：</label>
+					class="c-red">*</span>今日新增：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<textarea name="content" id="content" cols="" rows=""
-						class="textarea" placeholder="说点什么...最少输入10个字符">{$info.content}</textarea>
-					<p class="textarea-numberbar">
-						<em class="textarea-length">0</em>/100
-					</p>
+					<input type="text" class="input-text" value="{$info.today_new_num}"
+						placeholder="请输入今日新增数量" id="today_new_num" name="today_new_num">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>今日删除：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{$info.today_delete_num}"
+						placeholder="请输入今日删除数量" id="today_delete_num" name="today_delete_num">
 				</div>
 			</div>
 			<div class="row cl">
@@ -66,6 +85,7 @@
 				</div>
 			</div>
 			<input type="hidden" id="id" name="id" value="{$info.id}" />
+			<input type="hidden" id="status" name="status" value="{$info.status}" />
 		</form>
 	</article>
 
@@ -94,25 +114,28 @@
 				increaseArea : '20%'
 			});
 			//validation rules
-			$("#form-test-add").validate({
+			$("#form-fan-add").validate({
 				debug : false,
 				rules : {
-					title : {
+					total_fan_num : {
 						required : true,
-						minlength : 2,
-						maxlength : 16
 					},
-					content : {
+					today_new_num : {
+						required : true,
+					},
+					today_delete_num : {
 						required : true,
 					},
 				},
 				messages : {
-					title : {
-						required : "请输入标题",
-						minlength : "标题长度由2~16字符组成"
+					total_fan_num : {
+						required : "请填写总粉丝数量",
 					},
-					content : {
-						required : "请说点什么",
+					today_new_num : {
+						required : "请填写今日新增数量",
+					},
+					today_delete_num : {
+						required : "请填写今日删除数量",
 					},
 				},
 				onkeyup : false,
@@ -120,24 +143,30 @@
 				success : 'valid',
 			});
 			//submit form
-			$('#form-test-add').on('submit', function() {
-				if (!$('#title').val() || !$('#content').val()) {
-					return false;
-				}
-				var options = {
-					url : "{:url('test/test_submit')}",
-					dataType : "json",
-					type : "post",
-					clearForm : true,
-					resetForm : true,
-					timeout : 3000,
-					success : ResponseAfterSuccess,
-					error : function() {
-						alert('error!');
-					},
-				};
-				$('#form-test-add').ajaxSubmit(options);
-			});
+			$('#form-fan-add').on(
+					'submit',
+					function() {
+						if ($('#vipcn_id').val() == 0) {
+							layer.msg('请选择所属公众号!');
+							return false;
+						}
+						if (!$('#total_fan_num').val() || !$('#today_new_num').val()|| !$('#today_delete_num').val()) {
+							return false;
+						}						
+						var options = {
+							url : "{:url('fan/fan_submit')}",
+							dataType : "json",
+							type : "post",
+							clearForm : true,
+							resetForm : true,
+							timeout : 3000,
+							success : ResponseAfterSuccess,
+							error : function() {
+								alert('error!');
+							},
+						};
+						$('#form-fan-add').ajaxSubmit(options);
+					});
 		});
 		//form submit callback
 		function ResponseAfterSuccess(data) {

@@ -25,27 +25,36 @@
 <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>测试管理</title>
+<title>公众号管理</title>
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		测试管理 <span class="c-gray en">&gt;</span> 测试列表 <a
+		公众号管理 <span class="c-gray en">&gt;</span> 公众号列表 <a
 			class="btn btn-success radius r"
 			style="line-height: 1.6em; margin-top: 3px"
 			href="javascript:location.replace(location.href);" title="刷新"><i
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-		<form action="{:url('test/test_list')}" method="post">
+		<form action="{:url('vipcn/vipcn_list')}" method="post">
 			<div class="text-c">
-				日期范围： <input type="text" onfocus="selecttime(1)" name="datemin"
+			     类型： 
+			<span class="select-box" style="display:inline-block;width:120px;"> 			    
+				   <select class="select" name="type" id="type">
+				   		<option value=0>请选择</option>
+				   		<option value=1 {eq name="$filter.type" value="1"}selected{/eq}>服务号</option>
+				   		<option value=2 {eq name="$filter.type" value="2"}selected{/eq}>订阅号</option>
+				   		<option value=3 {eq name="$filter.type" value="3"}selected{/eq}>企业号</option>
+				   </select>
+			   </span>
+				   &nbsp;日期范围： <input type="text" onfocus="selecttime(1)" name="datemin"
 					id="datemin" value="{$filter.datemin}" class="input-text Wdate"
 					style="width: 120px;"> - <input type="text"
 					onfocus="selecttime(2)" name="datemax" id="datemax"
 					value="{$filter.datemax}" class="input-text Wdate"
 					style="width: 120px;"> <input type="text"
-					class="input-text" style="width: 250px" placeholder="输入标题、内容"
+					class="input-text" style="width: 250px" placeholder="输入名称、账号"
 					id="keywords" name="keywords" value="{$filter.keywords}">
 				<button type="submit" class="btn btn-success radius" id="search"
 					name="">
@@ -57,9 +66,9 @@
 			<span class="l"> <a href="javascript:;" onclick="datadel()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量删除</a> <a href="javascript:;"
-				onclick="test_add('添加测试','{:url('test/test_add')}','700','350')"
+				onclick="vipcn_add('添加公众号','{:url('vipcn/vipcn_add')}','700','500')"
 				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
-					添加测试</a>
+					添加公众号</a>
 			</span> <span class="r">共有数据：<strong>{$filter.total|default=0}</strong>
 				条
 			</span>
@@ -71,11 +80,15 @@
 					<tr class="text-c">
 						<th width="25"><input type="checkbox" name="" value=""></th>
 						<th width="80">ID</th>
-						<th width="250">标题</th>
-						<th width="400">内容</th>
-						<th width="150">创建时间</th>
+						<th width="200">名称</th>
+						<th width="200">账号</th>
+						<th width="250">AppID</th>
+						<th width="300">AppSecret</th>
+						<th width="150">类型</th>
+						<th width="200">创建时间</th>
+						<th width="200">更新时间</th>
 						<th width="150">状态</th>
-						<th width="300">操作</th>
+						<th width="350">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -84,25 +97,32 @@
 						<td><input type="checkbox" name="checkbox" value="{$vo.id}" /></td>
 						<td>{$vo.id}</td>
 						<td><u style="cursor: pointer" class="text-primary"
-							onclick="test_show('张三','{:url('test/test_show')}','{$vo.title}','850','500')">{$vo.title}</u></td>
-						<td>{$vo.content}</td>
+							onclick="vipcn_show('{$vo.name}','{:url('vipcn/vipcn_show')}','{$vo.id}','850','500')">{$vo.name}</u></td>
+						<td>{$vo.account?$vo.account:'-'}</td>
+						<td>{$vo.AppID?$vo.AppID:'-'}</td>
+						<td>{$vo.AppSecret?$vo.AppSecret:'-'}</td>
+						<td>{if condition="$vo['type']==1"} <font color="#44B549">
+								服务号</font> {elseif condition="$vo['type']==2"} <font color="#44B549">
+								订阅号</font> {else /} <font color="#44B549">企业号</font> {/if}
+						</td>
 						<td>{$vo.create_time}</td>
+						<td>{$vo.update_time?$vo.update_time:'-'}</td>
 						<td class="td-status">{if condition="$vo['status']==1"} <span
 							class="label label-success radius">已启用</span> {else /} <span
 							class="label label-defaunt radius">已停用</span> {/if}
 						</td>
 						<td class="td-manage">{if condition="$vo['status']==-1"} <a
 							style="text-decoration: none"
-							onClick="test_start(this,'{$vo.id}')" href="javascript:;"
-							title="启用"><i class="Hui-iconfont">&#xe631;</i></a> {else /} <a
+							onClick="vipcn_start(this,'{$vo.id}')" href="javascript:;"
+							title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a> {else /} <a
 							style="text-decoration: none"
-							onClick="test_stop(this,'{$vo.id}')" href="javascript:;"
+							onClick="vipcn_stop(this,'{$vo.id}')" href="javascript:;"
 							title="停用"><i class="Hui-iconfont">&#xe631;</i></a> {/if} <a
 							title="编辑" href="javascript:;"
-							onclick="test_edit('编辑','{:url('test/test_add')}','{$vo.id}','700','350')"
+							onclick="vipcn_edit('编辑','{:url('vipcn/vipcn_add')}','{$vo.id}','700','500')"
 							class="ml-5" style="text-decoration: none"><i
 								class="Hui-iconfont">&#xe6df;</i></a> <a title="删除"
-							href="javascript:;" onclick="test_del(this,'{$vo.id}')"
+							href="javascript:;" onclick="vipcn_del(this,'{$vo.id}')"
 							class="ml-5" style="text-decoration: none"><i
 								class="Hui-iconfont">&#xe6e2;</i></a>
 						</td>
@@ -138,25 +158,26 @@ $(function(){
 	});
 	
 });
-/*测试-添加*/
-function test_add(title,url,w,h){
+/*公众号-添加*/
+function vipcn_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
-/*测试-查看*/
-function test_show(title,url,id,w,h){
+/*公众号-查看*/
+function vipcn_show(title,url,id,w,h){
+	var url = url+"?id="+id;
 	layer_show(title,url,w,h);
 }
-/*测试-停用*/
-function test_stop(obj,id){
+/*公众号-停用*/
+function vipcn_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("test/switch_state")}',
+			url: '{:url("vipcn/switch_state")}',
 			dataType: 'json',
 			data:{"id":id,"status":-1},
 			success: function(data){
 				if(data==1){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="test_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="vipcn_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 					$(obj).remove();
 					layer.msg('已停用!',{icon: 5,time:1000});
@@ -170,17 +191,17 @@ function test_stop(obj,id){
 		});		
 	});
 }
-/*测试-启用*/
-function test_start(obj,id){
+/*公众号-启用*/
+function vipcn_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("test/switch_state")}',
+			url: '{:url("vipcn/switch_state")}',
 			dataType: 'json',
 			data:{"id":id,"status":1},
 			success: function(data){					
 				if(data==1){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="test_stop(this,'+id+')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="vipcn_stop(this,'+id+')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 					$(obj).remove();
 					layer.msg('已启用!',{icon: 6,time:1000});
@@ -194,17 +215,17 @@ function test_start(obj,id){
 		});
 	});
 }
-/*测试-编辑*/
-function test_edit(title,url,id,w,h){
+/*公众号-编辑*/
+function vipcn_edit(title,url,id,w,h){
 	var url = url +'?id='+id;
 	layer_show(title,url,w,h);
 }
-/*测试-删除*/
-function test_del(obj,id){
+/*公众号-删除*/
+function vipcn_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("test/test_del")}',
+			url: '{:url("vipcn/vipcn_del")}',
 			dataType: 'json',
 			data:{"ids":id},
 			success: function(data){
@@ -221,7 +242,7 @@ function test_del(obj,id){
 		});		
 	});
 }
-/*测试-批量删除*/
+/*公众号-批量删除*/
  function datadel(){
 	var ids = [];
 	 $.each($('input[name=checkbox]:checked'),function(){
@@ -233,7 +254,7 @@ function test_del(obj,id){
 	 layer.confirm('确认要批量删除吗？',function(index){
 			$.ajax({
 				type: 'POST',
-				url: '{:url("test/test_del")}',
+				url: '{:url("vipcn/vipcn_del")}',
 				dataType: 'json',
 				data:{"ids":ids.join(',')},
 				success: function(data){

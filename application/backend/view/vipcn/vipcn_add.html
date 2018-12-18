@@ -30,7 +30,7 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>添加测试</title>
+<title>添加公众号</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"
@@ -39,21 +39,59 @@
 <body>
 	<article class="page-container">
 		<form action="" method="post" class="form form-horizontal"
-			id="form-test-add">
+			id="form-vipcn-add">
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>标题：</label>
+					class="c-red">*</span>名称：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="{$info.title}"
-						placeholder="" id="title" name="title">
+					<input type="text" class="input-text" value="{$info.name}"
+						placeholder="请输入名称" id="name" name="name">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>内容：</label>
+					class="c-red">*</span>账号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<textarea name="content" id="content" cols="" rows=""
-						class="textarea" placeholder="说点什么...最少输入10个字符">{$info.content}</textarea>
+					<input type="text" class="input-text" value="{$info.account}"
+						placeholder="请输入账号" id="account" name="account">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>开发者ID(AppID)：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{$info.AppID}"
+						placeholder="请输入AppID" id="AppID" name="AppID">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>开发者密码(AppSecret)：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{$info.AppSecret}"
+						placeholder="请输入开发者密码" id="AppSecret" name="AppSecret">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>类型：</label>
+				<div class="formControls col-xs-4 col-sm-9">
+					<span class="select-box"> <select class="select" size="1"
+						name="type" id="type">
+							<option value="0">请选择公众号类型</option>
+							<option value="1" {eq name="$info.type" value="1"}selected{/eq}>服务号</option>
+							<option value="2" {eq name="$info.type" value="2"}selected{/eq}>订阅号</option>
+							<option value="3" {eq name="$info.type" value="3"}selected{/eq}>企业号</option>
+					</select>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>备注：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<textarea name="remark" id="remark" cols="" rows=""
+						class="textarea" placeholder="说点什么...最少输入10个字符">{$info.remark}</textarea>
 					<p class="textarea-numberbar">
 						<em class="textarea-length">0</em>/100
 					</p>
@@ -94,24 +132,42 @@
 				increaseArea : '20%'
 			});
 			//validation rules
-			$("#form-test-add").validate({
+			$("#form-vipcn-add").validate({
 				debug : false,
 				rules : {
-					title : {
+					name : {
 						required : true,
 						minlength : 2,
 						maxlength : 16
 					},
-					content : {
+					account : {
+						required : true,
+					},
+					AppID : {
+						required : true,
+					},
+					AppSecret : {
+						required : true,
+					},
+					remark : {
 						required : true,
 					},
 				},
 				messages : {
-					title : {
-						required : "请输入标题",
+					name : {
+						required : "请输入名称",
 						minlength : "标题长度由2~16字符组成"
 					},
-					content : {
+					account : {
+						required : "请填写账号信息",
+					},
+					AppID : {
+						required : "请填写AppID",
+					},
+					AppSecret : {
+						required : "请填写开发者密码",
+					},
+					remark : {
 						required : "请说点什么",
 					},
 				},
@@ -120,24 +176,32 @@
 				success : 'valid',
 			});
 			//submit form
-			$('#form-test-add').on('submit', function() {
-				if (!$('#title').val() || !$('#content').val()) {
-					return false;
-				}
-				var options = {
-					url : "{:url('test/test_submit')}",
-					dataType : "json",
-					type : "post",
-					clearForm : true,
-					resetForm : true,
-					timeout : 3000,
-					success : ResponseAfterSuccess,
-					error : function() {
-						alert('error!');
-					},
-				};
-				$('#form-test-add').ajaxSubmit(options);
-			});
+			$('#form-vipcn-add').on(
+					'submit',
+					function() {
+						if ($('#type').val() == 0) {
+							layer.msg('请选择类型!');
+							return false;
+						}
+						if (!$('#name').val() || !$('#remark').val()
+								|| !$('#AppID').val() || !$('#AppSecret').val()
+								|| !$('#account').val()) {
+							return false;
+						}
+						var options = {
+							url : "{:url('vipcn/vipcn_submit')}",
+							dataType : "json",
+							type : "post",
+							clearForm : true,
+							resetForm : true,
+							timeout : 3000,
+							success : ResponseAfterSuccess,
+							error : function() {
+								alert('error!');
+							},
+						};
+						$('#form-vipcn-add').ajaxSubmit(options);
+					});
 		});
 		//form submit callback
 		function ResponseAfterSuccess(data) {

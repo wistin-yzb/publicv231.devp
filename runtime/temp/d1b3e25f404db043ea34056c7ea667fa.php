@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:128:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\welcome.html";i:1545028121;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:128:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\welcome.html";i:1545114838;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
@@ -31,11 +31,11 @@
 <body>
 	<div class="page-container">
 		<p class="f-20 text-success">
-			欢迎使用公众号粉丝管理系统<span class="f-14">v1.0</span>后台模版！
+			欢迎使用<font color="#44B549">公众号粉丝管理系统<span class="f-14">v1.0</span></font>后台模版！
 		</p>
-		<p>登录次数：18</p>
+		<!-- <p>登录次数：18</p> -->
 		<p>上次登录IP：<?php echo $lastLoginIp; ?> 上次登录时间：<?php echo $lastLoginTime; ?></p>
-		<table class="table table-border table-bordered table-bg">
+		<!-- <table class="table table-border table-bordered table-bg">
 			<thead>
 				<tr>
 					<th colspan="7" scope="col">信息统计</th>
@@ -91,7 +91,7 @@
 					<td>0</td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 		<table class="table table-border table-bordered table-bg mt-20">
 			<thead>
 				<tr>
