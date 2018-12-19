@@ -48,7 +48,7 @@
 						name="vipcn_id" id="vipcn_id">							
 							<option value="0">请选择</option>
 							{volist name="vipcn_list" id="vo"}
-							<option value="{$vo.vipcn_id}-{$vo.name}" {eq name="$info['vipcn_id']" value="$vo.vipcn_id"}selected{/eq}>{$vo.name}</option>
+							<option value="{$vo.vipcn_id}-{$vo.name}-{$vo.type}" {eq name="$info['vipcn_id']" value="$vo.vipcn_id"}selected{/eq}>{$vo.name}</option>
 							{/volist}				
 					</select>
 					</span>

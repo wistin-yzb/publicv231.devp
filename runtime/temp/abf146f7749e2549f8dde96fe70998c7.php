@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:127:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\fan\fan_list.html";i:1545207434;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -37,16 +38,16 @@
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-		<form action="{:url('fan/fan_list')}" method="post">
+		<form action="<?php echo url('fan/fan_list'); ?>" method="post">
 			<div class="text-c">
 				日期范围： <input type="text" onfocus="selecttime(1)" name="datemin"
-					id="datemin" value="{$filter.datemin}" class="input-text Wdate"
+					id="datemin" value="<?php echo $filter['datemin']; ?>" class="input-text Wdate"
 					style="width: 120px;" autocomplete="off" > - <input type="text"
 					onfocus="selecttime(2)" name="datemax" id="datemax"
-					value="{$filter.datemax}" class="input-text Wdate"
+					value="<?php echo $filter['datemax']; ?>" class="input-text Wdate"
 					style="width: 120px;" autocomplete="off" > <input type="text"
 					class="input-text" style="width: 250px" placeholder="输入总粉丝数量"
-					id="keywords" name="keywords" value="{$filter.keywords}">
+					id="keywords" name="keywords" value="<?php echo $filter['keywords']; ?>">
 				<button type="submit" class="btn btn-success radius" id="search"
 					name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
@@ -57,10 +58,10 @@
 			<span class="l"> <a href="javascript:;" onclick="datadel()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量删除</a> <a href="javascript:;"
-				onclick="fan_add('添加粉丝数据','{:url('fan/fan_add')}','700','350')"
+				onclick="fan_add('添加粉丝数据','<?php echo url('fan/fan_add'); ?>','700','350')"
 				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
 					添加粉丝数据</a>
-			</span> <span class="r">共有数据：<strong>{$filter.total|default=0}</strong>
+			</span> <span class="r">共有数据：<strong><?php echo (isset($filter['total']) && ($filter['total'] !== '')?$filter['total']:0); ?></strong>
 				条
 			</span>
 		</div>
@@ -83,38 +84,38 @@
 					</tr>
 				</thead>
 				<tbody>
-					{volist name="list" id="vo"}
+					<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 					<tr class="text-c">
-						<td><input type="checkbox" name="checkbox" value="{$vo.id}" /></td>
-						<td>{$vo.id}</td>
-						<td>{$vo.vipcn_name}</td>						
-						<td>{$vo.total_fan_num?$vo.total_fan_num:'-'}</td>
-						<td>{$vo.today_new_num?$vo.today_new_num:'-'}</td>
-						<td>{$vo.today_delete_num?$vo.today_delete_num:'-'}</td>	
-						<td>{$vo.today_extra_num?$vo.today_extra_num:'-'}</td>						
-						<td>{$vo.create_time?$vo.create_time:'-'}</td>
-						<td>{$vo.update_time?$vo.update_time:'-'}</td>					
-						<td class="td-status">{if condition="$vo['status']==1"} <span
-							class="label label-success radius">已启用</span> {else /} <span
-							class="label label-defaunt radius">已停用</span> {/if}
+						<td><input type="checkbox" name="checkbox" value="<?php echo $vo['id']; ?>" /></td>
+						<td><?php echo $vo['id']; ?></td>
+						<td><?php echo $vo['vipcn_name']; ?></td>						
+						<td><?php echo !empty($vo['total_fan_num'])?$vo['total_fan_num']:'-'; ?></td>
+						<td><?php echo !empty($vo['today_new_num'])?$vo['today_new_num']:'-'; ?></td>
+						<td><?php echo !empty($vo['today_delete_num'])?$vo['today_delete_num']:'-'; ?></td>	
+						<td><?php echo !empty($vo['today_extra_num'])?$vo['today_extra_num']:'-'; ?></td>						
+						<td><?php echo !empty($vo['create_time'])?$vo['create_time']:'-'; ?></td>
+						<td><?php echo !empty($vo['update_time'])?$vo['update_time']:'-'; ?></td>					
+						<td class="td-status"><?php if($vo['status']==1): ?> <span
+							class="label label-success radius">已启用</span> <?php else: ?> <span
+							class="label label-defaunt radius">已停用</span> <?php endif; ?>
 						</td>
-						<td class="td-manage">{if condition="$vo['status']==-1"} <a
+						<td class="td-manage"><?php if($vo['status']==-1): ?> <a
 							style="text-decoration: none"
-							onClick="fan_start(this,'{$vo.id}')" href="javascript:;"
-							title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a> {else /} <a
+							onClick="fan_start(this,'<?php echo $vo['id']; ?>')" href="javascript:;"
+							title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a> <?php else: ?> <a
 							style="text-decoration: none"
-							onClick="fan_stop(this,'{$vo.id}')" href="javascript:;"
-							title="停用"><i class="Hui-iconfont">&#xe631;</i></a> {/if} <a
+							onClick="fan_stop(this,'<?php echo $vo['id']; ?>')" href="javascript:;"
+							title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <?php endif; ?> <a
 							title="编辑" href="javascript:;"
-							onclick="fan_edit('编辑','{:url('fan/fan_add')}','{$vo.id}','700','350')"
+							onclick="fan_edit('编辑','<?php echo url('fan/fan_add'); ?>','<?php echo $vo['id']; ?>','700','350')"
 							class="ml-5" style="text-decoration: none"><i
 								class="Hui-iconfont">&#xe6df;</i></a> <a title="删除"
-							href="javascript:;" onclick="fan_del(this,'{$vo.id}')"
+							href="javascript:;" onclick="fan_del(this,'<?php echo $vo['id']; ?>')"
 							class="ml-5" style="text-decoration: none"><i
 								class="Hui-iconfont">&#xe6e2;</i></a>
 						</td>
 					</tr>
-					{/volist}
+					<?php endforeach; endif; else: echo "" ;endif; ?>
 				</tbody>
 			</table>
 		</div>
@@ -159,7 +160,7 @@ function fan_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("fan/switch_state")}',
+			url: '<?php echo url("fan/switch_state"); ?>',
 			dataType: 'json',
 			data:{"id":id,"status":-1},
 			success: function(data){
@@ -183,7 +184,7 @@ function fan_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("fan/switch_state")}',
+			url: '<?php echo url("fan/switch_state"); ?>',
 			dataType: 'json',
 			data:{"id":id,"status":1},
 			success: function(data){					
@@ -212,7 +213,7 @@ function fan_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '{:url("fan/fan_del")}',
+			url: '<?php echo url("fan/fan_del"); ?>',
 			dataType: 'json',
 			data:{"ids":id},
 			success: function(data){
@@ -241,7 +242,7 @@ function fan_del(obj,id){
 	 layer.confirm('确认要批量删除吗？',function(index){
 			$.ajax({
 				type: 'POST',
-				url: '{:url("fan/fan_del")}',
+				url: '<?php echo url("fan/fan_del"); ?>',
 				dataType: 'json',
 				data:{"ids":ids.join(',')},
 				success: function(data){

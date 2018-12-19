@@ -45,15 +45,15 @@
 				   		<option value=0>请选择</option>
 				   		<option value=1 {eq name="$filter.type" value="1"}selected{/eq}>服务号</option>
 				   		<option value=2 {eq name="$filter.type" value="2"}selected{/eq}>订阅号</option>
-				   		<option value=3 {eq name="$filter.type" value="3"}selected{/eq}>企业号</option>
+				   		<!-- <option value=3 {eq name="$filter.type" value="3"}selected{/eq}>企业号</option> -->
 				   </select>
 			   </span>
 				   &nbsp;日期范围： <input type="text" onfocus="selecttime(1)" name="datemin"
 					id="datemin" value="{$filter.datemin}" class="input-text Wdate"
-					style="width: 120px;"> - <input type="text"
+					style="width: 120px;" autocomplete="off" > - <input type="text"
 					onfocus="selecttime(2)" name="datemax" id="datemax"
 					value="{$filter.datemax}" class="input-text Wdate"
-					style="width: 120px;"> <input type="text"
+					style="width: 120px;" autocomplete="off" > <input type="text"
 					class="input-text" style="width: 250px" placeholder="输入名称、账号"
 					id="keywords" name="keywords" value="{$filter.keywords}">
 				<button type="submit" class="btn btn-success radius" id="search"

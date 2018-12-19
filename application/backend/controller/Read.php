@@ -7,6 +7,9 @@ use think\Controller;
 use think\Db;
 
 class Read extends controller {
+	public function __construct(){
+		action('Common/checkSession');
+	}
 	public function read_list() {
 		$post = input ( 'post.' );
 		$keywords = @$post ['keywords'] ? trim ( @$post ['keywords'] ) : '';
@@ -125,7 +128,53 @@ class Read extends controller {
 		exit ( json_encode ( - 1 ) );
 	}
 	public function read_report() {
+		$post = input ( 'post.' );
+		$vipcn_type = @$post ['vipcn_type'] ? trim ( @$post ['vipcn_type'] ) : '';
+		$keywords = @$post ['keywords'] ? trim ( @$post ['keywords'] ) : '';
+		$datemin = @$post ['datemin'] ? strtotime ( trim ( @$post ['datemin'] ) ) : '';
+		$datemax = @$post ['datemax'] ? strtotime ( trim ( @$post ['datemax'] ) ) : '';
 		$view = new View ();
+		$where = "`id`>0 ";
+		if ($vipcn_type) {
+			$where .= "and (`vipcn_type`=$vipcn_type)";
+		}
+		if ($keywords) {
+			$where .= "and (`pageview` like '%$keywords%')";
+		}
+		if ($datemin != '' && $datemax == '') {
+			$where .= "and `create_time`>='$datemin'";
+		}
+		if ($datemin == '' && $datemax != '') {
+			$where .= "and `create_time`<='$datemax'";
+		}
+		if ($datemin && $datemax) {
+			$where .= "and (`create_time`>='$datemin' and `create_time`<='$datemax')";
+		}
+		$list = db ( 'read' )->where ( $where )->select ();
+		//统计
+		$pageview= 0;
+		$readrate= 0;
+		if ($list) {
+			foreach ( $list as $key => $val ) {
+				if ($val ['create_time'])
+					$list [$key] ['create_time'] = date ( 'Y-m-d H:i', $val ['create_time'] );
+					if ($val ['update_time'])
+						$list [$key] ['update_time'] = date ( 'Y-m-d H:i', $val ['update_time'] );
+						$pageview+=$val['pageview'];
+						$readrate+=$val['readrate'];
+			}
+		}
+		$view->list = $list;
+		$filter = [
+				'vipcn_type' => $vipcn_type,
+				'keywords' => $keywords,
+				'datemin' => @$post ['datemin'],
+				'datemax' => @$post ['datemax'],
+				'total' => count ( $list )
+		];
+		$view->filter = $filter;
+		$view->pageview= $pageview;
+		$view->readrate= round($readrate/count($list),2);		
 		return $view->fetch ( 'read/read_report' );
 	}
 }

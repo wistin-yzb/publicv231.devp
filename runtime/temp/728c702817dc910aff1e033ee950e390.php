@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\fan\fan_add.html";i:1545209363;}*/ ?>
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -30,19 +31,16 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>添加阅读数据</title>
+<title>添加粉丝数据</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"
 	content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
-	<style>
-		.percentage{display:inline-block;position:relative;margin-left:102%;margin-top:-27%;font-size:16px;}
-	</style>
 </head>
 <body>
 	<article class="page-container">
 		<form action="" method="post" class="form form-horizontal"
-			id="form-read-add">
+			id="form-fan-add">
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
 					class="c-red">*</span>公众号：</label>
@@ -50,28 +48,35 @@
 					<span class="select-box"> <select class="select" size="1"
 						name="vipcn_id" id="vipcn_id">							
 							<option value="0">请选择</option>
-							{volist name="vipcn_list" id="vo"}
-							<option value="{$vo.vipcn_id}-{$vo.name}" {eq name="$info['vipcn_id']" value="$vo.vipcn_id"}selected{/eq}>{$vo.name}</option>
-							{/volist}				
+							<?php if(is_array($vipcn_list) || $vipcn_list instanceof \think\Collection || $vipcn_list instanceof \think\Paginator): $i = 0; $__LIST__ = $vipcn_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+							<option value="<?php echo $vo['vipcn_id']; ?>-<?php echo $vo['name']; ?>-<?php echo $vo['type']; ?>" <?php if($info['vipcn_id'] == $vo['vipcn_id']): ?>selected<?php endif; ?>><?php echo $vo['name']; ?></option>
+							<?php endforeach; endif; else: echo "" ;endif; ?>				
 					</select>
 					</span>
 				</div>
 			</div>	
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>页面阅读数：</label>
+					class="c-red">*</span>总粉丝数量：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="{$info.pageview}"
-						placeholder="请输入页面阅读数" id="pageview" name="pageview">
+					<input type="text" class="input-text" value="<?php echo $info['total_fan_num']; ?>"
+						placeholder="请输入总粉丝数量" id="total_fan_num" name="total_fan_num">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><span
-					class="c-red">*</span>阅读率：</label>
-				<div class="formControls col-xs-4 col-sm-9">
-					<input type="text" class="input-text" value="{$info.readrate}"
-						placeholder="请输入阅读率,如:75" id="readrate" name="readrate">
-						<span class="percentage">%</span>
+					class="c-red">*</span>今日新增：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<?php echo $info['today_new_num']; ?>"
+						placeholder="请输入今日新增数量" id="today_new_num" name="today_new_num">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-3"><span
+					class="c-red">*</span>今日删除：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<?php echo $info['today_delete_num']; ?>"
+						placeholder="请输入今日删除数量" id="today_delete_num" name="today_delete_num">
 				</div>
 			</div>
 			<div class="row cl">
@@ -80,8 +85,8 @@
 						value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 				</div>
 			</div>
-			<input type="hidden" id="id" name="id" value="{$info.id}" />
-			<input type="hidden" id="status" name="status" value="{$info.status}" />
+			<input type="hidden" id="id" name="id" value="<?php echo $info['id']; ?>" />
+			<input type="hidden" id="status" name="status" value="<?php echo $info['status']; ?>" />
 		</form>
 	</article>
 
@@ -110,22 +115,28 @@
 				increaseArea : '20%'
 			});
 			//validation rules
-			$("#form-read-add").validate({
+			$("#form-fan-add").validate({
 				debug : false,
 				rules : {
-					pageview : {
+					total_fan_num : {
 						required : true,
 					},
-					readrate : {
+					today_new_num : {
+						required : true,
+					},
+					today_delete_num : {
 						required : true,
 					},
 				},
 				messages : {
-					pageview : {
-						required : "请填写页面阅读数",
+					total_fan_num : {
+						required : "请填写总粉丝数量",
 					},
-					readrate : {
-						required : "请填写阅读率,如:75",
+					today_new_num : {
+						required : "请填写今日新增数量",
+					},
+					today_delete_num : {
+						required : "请填写今日删除数量",
 					},
 				},
 				onkeyup : false,
@@ -133,18 +144,18 @@
 				success : 'valid',
 			});
 			//submit form
-			$('#form-read-add').on(
+			$('#form-fan-add').on(
 					'submit',
 					function() {
 						if ($('#vipcn_id').val() == 0) {
 							layer.msg('请选择所属公众号!');
 							return false;
 						}
-						if (!$('#pageview').val() || !$('#readrate').val()) {
+						if (!$('#total_fan_num').val() || !$('#today_new_num').val()|| !$('#today_delete_num').val()) {
 							return false;
 						}						
 						var options = {
-							url : "{:url('read/read_submit')}",
+							url : "<?php echo url('fan/fan_submit'); ?>",
 							dataType : "json",
 							type : "post",
 							clearForm : true,
@@ -155,7 +166,7 @@
 								alert('error!');
 							},
 						};
-						$('#form-read-add').ajaxSubmit(options);
+						$('#form-fan-add').ajaxSubmit(options);
 					});
 		});
 		//form submit callback

@@ -25,12 +25,12 @@
 <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>阅读数据管理</title>
+<title>头条阅读管理</title>
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		阅读数据管理 <span class="c-gray en">&gt;</span> 阅读数据列表 <a
+		头条阅读管理 <span class="c-gray en">&gt;</span> 阅读数据列表 <a
 			class="btn btn-success radius r"
 			style="line-height: 1.6em; margin-top: 3px"
 			href="javascript:location.replace(location.href);" title="刷新"><i
@@ -41,10 +41,10 @@
 			<div class="text-c">
 				日期范围： <input type="text" onfocus="selecttime(1)" name="datemin"
 					id="datemin" value="{$filter.datemin}" class="input-text Wdate"
-					style="width: 120px;"> - <input type="text"
+					style="width: 120px;" autocomplete="off" > - <input type="text"
 					onfocus="selecttime(2)" name="datemax" id="datemax"
 					value="{$filter.datemax}" class="input-text Wdate"
-					style="width: 120px;"> <input type="text"
+					style="width: 120px;" autocomplete="off" > <input type="text"
 					class="input-text" style="width: 250px" placeholder="输入页面阅读数"
 					id="keywords" name="keywords" value="{$filter.keywords}">
 				<button type="submit" class="btn btn-success radius" id="search"

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1545124939;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:126:"F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.public.devp\public/../application/backend\view\index\index.html";i:1545211024;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -284,27 +284,27 @@
 			</dl>
 			<dl id="menu-read">
 				<dt>
-					<i class="Hui-iconfont">&#xe653;</i> 阅读数据管理<i
+					<i class="Hui-iconfont">&#xe653;</i> 头条阅读管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
 				<dd>
 					<ul>
 						<li><a data-href="<?php echo url('read/read_list'); ?>" data-title="阅读数据列表"
-							href="javascript:void(0)">阅读数据列表</a></li>											
+							href="javascript:void(0)">头条阅读列表</a></li>											
 					</ul>
 				</dd>
 			</dl>
 			<dl id="menu-read">
 				<dt>
-					<i class="Hui-iconfont">&#xe629;</i> 图形报表管理<i
+					<i class="Hui-iconfont">&#xe629;</i> 统计报表管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
 				<dd>
 					<ul>
 						<li><a data-href="<?php echo url('fan/fan_report'); ?>" data-title="粉丝数据报表"
 							href="javascript:void(0)">粉丝数据报表</a></li>		
-						<li><a data-href="<?php echo url('read/read_report'); ?>" data-title="阅读数据报表"
-							href="javascript:void(0)">阅读数据报表</a></li>												
+						<li><a data-href="<?php echo url('read/read_report'); ?>" data-title="头条阅读报表"
+							href="javascript:void(0)">头条阅读报表</a></li>												
 					</ul>
 				</dd>
 			</dl>

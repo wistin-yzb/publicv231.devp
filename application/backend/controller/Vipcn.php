@@ -7,6 +7,9 @@ use think\Controller;
 use think\Db;
 
 class Vipcn extends controller {
+	public function __construct(){
+		action('Common/checkSession');
+	}
 	public function vipcn_list() {
 		$post = input ( 'post.' );
 		$type = @$post ['type'] ? trim ( @$post ['type'] ) : '';

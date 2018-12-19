@@ -7,14 +7,9 @@ use \think\Controller;
 use think\Db;
 
 class Index extends controller {
-	
 	// index
 	public function index() {		
-		$data = Db::name('test')->where('id',1)->find();
-		//助手函数
-// 		$data = db('test')->where('id',1)->find();
-// 		echo '<pre>';
-// 		var_export($data);		
+		action('Common/checkSession');
 		$view = new View ();
 		return $view->fetch ();
 	}
@@ -41,12 +36,14 @@ class Index extends controller {
 		if (! captcha_check ( $captcha )) {
 			$this->error ( '验证码错误' );
 			exit ();
-		}
+		}	
+		session('account', $account);
 		$this->redirect ( 'backend/index/index');
 	}
 	
 	// welcome
 	public function welcome() {
+		action('Common/checkSession');
 		$view = new View ();		
 		$view->lastLoginIp = $this->request->ip();
 		$view->lastLoginTime = date('Y-m-d H:i:s',time());
@@ -55,6 +52,7 @@ class Index extends controller {
 	
 	// loginout
 	public function loginout() {
+		session('account',null);
 		$systime = time ();
 		$this->redirect ( 'backend/index/login', [ 
 				'token' => 'ffdffferr023dvwiwiwixin;~*)999adf' . $systime 
